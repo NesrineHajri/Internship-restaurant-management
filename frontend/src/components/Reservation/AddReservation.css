@@ -1,0 +1,14 @@
+.reservation-container {
+    max-width: 900px;
+    margin: 96px auto;
+    padding: 20px;
+    border: none;
+    border-radius: 8px;
+    box-shadow: none;
+    background-color: #ffffff;
+    font-family: ui-monospace;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-direction: column;
+}
