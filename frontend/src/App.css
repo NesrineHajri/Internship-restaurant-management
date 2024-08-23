@@ -41,11 +41,13 @@ label {
 /* Add space to the right of the Log out link */
 .navbar-nav .nav-item:last-child .nav-link {
   margin-right: 20px; /* Adjust the value as needed */
+  color: black;
 }
 
 /* Add space to the left of the brand text */
 .navbar-brand {
   margin-left: 20px; /* Adjust the value as needed */
+  color: black;
   
 }
 
@@ -53,6 +55,7 @@ label {
 /* Remove underline from all links in the navbar */
 .navbar-nav .nav-link {
   text-decoration: none; /* Remove underline by default */
+  color: black;
  
 }
 
@@ -67,3 +70,81 @@ label {
 
   text-decoration: none; /* Ensure no underline on hover */
 }
+
+/**********/
+
+li.nav-item {
+  margin-left: 20px;
+}
+
+
+.navbar-nav.mr-auto {
+  flex-direction: row;
+}
+
+.navbar-nav.ml-auto {
+  flex-direction: row;
+}
+
+
+
+img {
+  width: 200px;
+  height: 76px;
+}
+
+nav.navbar {
+  height: 45px;
+}
+
+/******effacer-scroll**********/
+
+/* Hide scrollbars for all elements */
+body {
+  overflow: hidden;
+}
+
+/* Hide scrollbars but allow scrolling with mouse/trackpad */
+body {
+  overflow: -moz-scrollbars-none; /* For Firefox */
+  -ms-overflow-style: none; /* For Internet Explorer and Edge */
+  scrollbar-width: none; /* For Firefox */
+}
+
+body::-webkit-scrollbar { 
+  display: none; /* For Chrome, Safari, and Opera */
+}
+
+/***header***/
+
+.d-flex.justify-content-center.align-items-center {
+  height: 63px;
+}
+
+.header {
+  color: white;
+}
+
+.header .me-2 {
+  color: white;
+  font-weight: bold; /* Rend le texte et les icônes en gras */
+}
+
+.header a {
+  color: white;
+  text-decoration: none; /* Enlève le soulignement des liens */
+  font-weight: bold; /* Rend le texte des liens en gras */
+}
+
+.header a:hover {
+  color: #f0f0f0; /* Couleur plus claire au survol */
+}
+
+
+svg {
+  margin: 2px;
+}
+
+
+
+

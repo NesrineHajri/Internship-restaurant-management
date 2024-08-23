@@ -60,15 +60,7 @@
     border-color: #004085;
   }
   
-  /* Style pour les liens */
-  a {
-    color: #007bff;
-  }
-  
-  a:hover {
-    color: #0056b3;
-    text-decoration: underline;
-  }
+
   
   /* Style pour les messages d'alerte */
   .alert {
@@ -133,3 +125,49 @@
     text-decoration: underline;
   }
   
+
+  /*************/
+
+/* Assurez-vous que les champs de texte et les boutons ont la même largeur */
+.form-control,
+.btn-block {
+  width: 100%;
+  box-sizing: border-box; /* Assure que les bordures et le padding sont inclus dans la largeur totale */
+}
+
+/* Facultatif : vous pouvez ajouter un peu d'espacement entre les champs et le bouton */
+.form-group {
+  margin-bottom: 15px;
+}
+
+button.btn.btn-block {
+  background-color: #666666;
+}
+
+.forgot-password {
+  font-size: 14px;
+  color: #000;
+  text-decoration: underline;
+}
+
+a {
+  font-size: 14px;
+  color: #000;
+  text-decoration: underline;
+}
+
+.form-group p {
+  font-size: 14px;        /* Taille de la police */
+  color: #000;            /* Couleur du texte */
+  text-align: center;     /* Centrer le texte */
+}
+
+.form-group a {
+  color: #000;            /* Couleur du lien */
+  text-decoration: underline; /* Souligner le texte du lien */
+}
+
+.form-group a:hover {
+  color: #007bff;         /* Couleur du lien au survol (optionnel) */
+  text-decoration: underline; /* Maintenir le soulignement au survol */
+}

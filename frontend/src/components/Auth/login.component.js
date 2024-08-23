@@ -130,11 +130,11 @@ class Login extends Component {
             <p className="text-center">
               Don't have an account? <a href="/register">Sign up</a>
             </p>
-          </div>
+            </div>
 
             <div className="form-group">
               <button
-                className="btn btn-primary btn-block"
+                className="btn  btn-block"
                 disabled={this.state.loading}
               >
                 {this.state.loading && (
