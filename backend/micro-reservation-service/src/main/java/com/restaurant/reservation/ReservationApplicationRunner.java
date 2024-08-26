@@ -6,21 +6,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-@SpringBootApplication
-public class ReservationApplicationRunner {
 
+
+@SpringBootApplication
+@EnableDiscoveryClient
+
+public class ReservationApplicationRunner {
+/*
     @Autowired
     private ReservationService reservationService;
-
+*/
     public static void main(String[] args) {
         SpringApplication.run(ReservationApplicationRunner.class, args);
     }
-
+/*
     @Bean
     public CommandLineRunner run() {
         return args -> {
@@ -37,4 +42,6 @@ public class ReservationApplicationRunner {
             System.out.println("Created Reservation ID: " + savedReservation.getReservationId());
         };
     }
+
+ */
 }

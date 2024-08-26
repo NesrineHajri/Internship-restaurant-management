@@ -100,6 +100,11 @@ public class AuthController {
             signUpRequest.getEmail(),
             encoder.encode(signUpRequest.getPassword())); // Encrypt the password
 
+    // Champs optionnels
+    user.setFirstName(signUpRequest.getFirstName());
+    user.setLastName(signUpRequest.getLastName());
+    user.setMobileNumber(signUpRequest.getMobileNumber());
+
     Set<String> strRoles = signUpRequest.getRole();
     Set<Role> roles = new HashSet<>();
 

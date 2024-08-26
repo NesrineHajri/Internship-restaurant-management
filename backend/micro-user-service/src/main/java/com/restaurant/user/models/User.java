@@ -6,7 +6,9 @@ import java.util.Set;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+
 
 @Entity
 @Table(name = "customers",
@@ -32,11 +34,21 @@ public class User {
   @Size(max = 120)
   private String password;
 
+  @Column(nullable = true)
+  private String firstName;
+
+  @Column(nullable = true)
+  private String lastName;
+
+  @Column(nullable = true)
+  private String mobileNumber;
+
   @ManyToMany(fetch = FetchType.LAZY)
   @JoinTable(  name = "user_roles", 
         joinColumns = @JoinColumn(name = "user_id"), 
         inverseJoinColumns = @JoinColumn(name = "role_id"))
   private Set<Role> roles = new HashSet<>();
+
 
   public User() {
   }
@@ -45,6 +57,14 @@ public class User {
     this.username = username;
     this.email = email;
     this.password = password;
+  }
+  public User(String username, String email, String password, String firstName, String lastName, String mobileNumber) {
+    this.username = username;
+    this.email = email;
+    this.password = password;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.mobileNumber = mobileNumber;
   }
 
   public Long getId() {
@@ -86,4 +106,30 @@ public class User {
   public void setRoles(Set<Role> roles) {
     this.roles = roles;
   }
+
+  public String getFirstName() {
+    return firstName;
+  }
+
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
+  }
+
+  public String getLastName() {
+    return lastName;
+  }
+
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
+  }
+
+  public String getMobileNumber() {
+    return mobileNumber;
+  }
+
+  public void setMobileNumber(String mobileNumber) {
+    this.mobileNumber = mobileNumber;
+  }
 }
+
+
