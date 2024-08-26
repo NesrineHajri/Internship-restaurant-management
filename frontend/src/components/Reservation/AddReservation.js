@@ -1,26 +1,33 @@
 import React, { useState } from 'react';
+import Calendar from 'react-calendar';
 import ReservationService from '../../services/ReservationService.js';
-import './AddReservation.css'; // Import du fichier CSS
+import './AddReservation.css';
 
 function AddReservation() {
-    const [selectedDate, setSelectedDate] = useState('');
+    const [selectedDate, setSelectedDate] = useState(new Date());
     const [selectedTime, setSelectedTime] = useState('');
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
         mobileNumber: '',
-        reserveFor: ''
+        reserveFor: '' // Default to empty
     });
     const [step, setStep] = useState('selectDate');
     const [message, setMessage] = useState('');
 
-    const handleDateChange = (e) => {
-        setSelectedDate(e.target.value);
+    const timeOptions = {
+        Breakfast: ["7h00", "7h30", "8h00", "8h30"],
+        Lunch: ["11h30", "12h00", "12h30", "13h00"],
+        Dinner: ["18h00", "18h30", "19h00", "19h30"]
+    };
+
+    const handleDateChange = (date) => {
+        setSelectedDate(date);
         setStep('selectTime');
     };
 
-    const handleTimeChange = (e) => {
-        setSelectedTime(e.target.value);
+    const handleTimeChange = (time) => {
+        setSelectedTime(time);
         setStep('fillForm');
     };
 
@@ -36,7 +43,7 @@ function AddReservation() {
         e.preventDefault();
 
         const reservation = {
-            date: selectedDate,
+            date: selectedDate.toISOString().split('T')[0],
             time: selectedTime,
             ...formData
         };
@@ -53,48 +60,53 @@ function AddReservation() {
     };
 
     const resetForm = () => {
-        setSelectedDate('');
+        setSelectedDate(new Date());
         setSelectedTime('');
         setFormData({
             firstName: '',
             lastName: '',
             mobileNumber: '',
-            reserveFor: ''
+            reserveFor: '' // Reset to empty
         });
         setStep('selectDate');
     };
 
     return (
         <div className="reservation-container">
-            <h1>PICK A DAY YOU LIKE</h1>
             {step === 'selectDate' && (
-                <div className="form-group">
-                    <label htmlFor="date">Select Date:</label>
-                    <input
-                        type="date"
-                        id="date"
-                        value={selectedDate}
+                <div className="calendar-container">
+                    <h1>PICK A DAY YOU LIKE</h1>
+                    <Calendar
                         onChange={handleDateChange}
-                        required
+                        value={selectedDate}
                     />
                 </div>
             )}
             {step === 'selectTime' && (
-                <div className="form-group">
-                    <label htmlFor="time">Select Time:</label>
-                    <input
-                        type="time"
-                        id="time"
-                        value={selectedTime}
-                        onChange={handleTimeChange}
-                        required
-                    />
+                <div className="timepicker-container">
+                    <h2>SELECT A TIME BY A CLICK</h2>
+                    {Object.keys(timeOptions).map((meal, index) => (
+                        <div key={index} className="meal-group">
+                            <h3>{meal}</h3>
+                            <div className="meal-times">
+                                {timeOptions[meal].map((time, idx) => (
+                                    <button
+                                        key={idx}
+                                        className={`time-option ${selectedTime === time ? 'selected' : ''}`}
+                                        onClick={() => handleTimeChange(time)}
+                                    >
+                                        {time}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+                    ))}
                 </div>
             )}
             {step === 'fillForm' && (
                 <form onSubmit={handleSubmit} className="reservation-form">
-                    <h2>SELECT A TIME BY A CLICK</h2>
-                    <div className="form-group">
+                    <h1>FILL IN BOOKING DETAIL</h1>
+                    <div className="form-group custom-form-group">
                         <label htmlFor="firstName">First Name:</label>
                         <input
                             type="text"
@@ -105,7 +117,7 @@ function AddReservation() {
                             required
                         />
                     </div>
-                    <div className="form-group">
+                    <div className="form-group custom-form-group">
                         <label htmlFor="lastName">Last Name:</label>
                         <input
                             type="text"
@@ -116,7 +128,7 @@ function AddReservation() {
                             required
                         />
                     </div>
-                    <div className="form-group">
+                    <div className="form-group custom-form-group">
                         <label htmlFor="mobileNumber">Mobile Number:</label>
                         <input
                             type="tel"
@@ -129,16 +141,25 @@ function AddReservation() {
                             title="Please enter a valid 10-digit mobile number."
                         />
                     </div>
-                    <div className="form-group">
+                    <div className="form-group custom-form-group">
                         <label htmlFor="reserveFor">Reserve For:</label>
-                        <input
-                            type="text"
+                        <select
                             id="reserveFor"
                             name="reserveFor"
                             value={formData.reserveFor}
                             onChange={handleInputChange}
                             required
-                        />
+                        >
+                            <option value=""></option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                        </select>
                     </div>
                     <button type="submit" className="btn btn-primary">Reserve My Table</button>
                 </form>

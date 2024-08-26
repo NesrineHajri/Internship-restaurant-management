@@ -123,12 +123,12 @@ class App extends Component {
   {showUserBoard && (
     <>
       <li className="nav-item">
-        <Link to={"/user"} className="nav-link">
+        <Link to={"/AddReservation"} className="nav-link">
           Make reservation
         </Link>
       </li>
       <li className="nav-item">
-        <Link to={"/AddReservation"} className="nav-link">
+        <Link to={"/user"} className="nav-link">
           My reservation
         </Link>
       </li>

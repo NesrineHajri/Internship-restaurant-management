@@ -25,7 +25,7 @@ class AuthService {
   }
 
   // Register method
-  register(username, email, password, confirmPassword) {
+  register(username, email, password, confirmPassword, firstName = '', lastName = '', mobileNumber = '') {
     // Client-side password validation
     if (password !== confirmPassword) {
       return Promise.reject(new Error("Passwords do not match!"));
@@ -35,7 +35,10 @@ class AuthService {
       username,
       email,
       password,
-      confirmPassword
+      confirmPassword,
+      firstName,
+      lastName,
+      mobileNumber
     })
     .catch(error => {
       console.error("Registration failed:", error);
