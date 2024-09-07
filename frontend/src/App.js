@@ -4,13 +4,13 @@ import "./App.css";
 import logo from './assets/images/logo.png';
 import AuthService from "./services/auth.service";
 
+
 import Login from "./components/Auth/login.component";
-import Register from "./components/register.component";
+import Register from "./components/Auth/register.component";
 import Profile from "./components/profile.component";
 import BoardUser from "./components/board-user.component";
 import BoardAdmin from "./components/board-admin.component";
 import EventBus from "./common/EventBus";
-import Reservation from "./components/Reservation/reservation";
 import AddReservation from "./components/Reservation/AddReservation";
 import { FaPhoneAlt, FaEnvelope, FaGraduationCap, FaFacebookF, FaInstagram, FaTwitter, FaYoutube, FaLinkedinIn  } from 'react-icons/fa';
 // Import Icons
@@ -164,9 +164,8 @@ class App extends Component {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/profile" element={<Profile />} />
-            <Route path="/user" element={<BoardUser />} />
+            <Route path="/user" element={< BoardUser />} />
             <Route path="/admin" element={<BoardAdmin />} />
-            <Route path="/reserve" element={<Reservation />} />
             <Route path="/addReservation" element={<AddReservation />} />
           </Routes>
         </div>
