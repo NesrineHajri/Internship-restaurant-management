@@ -1,55 +1,42 @@
 package com.restaurant.reservation.Controller;
 
+import com.restaurant.reservation.Model.FullReservationResponse;
 import com.restaurant.reservation.Model.Reservation;
 import com.restaurant.reservation.Service.ReservationService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.GetMapping;
+
+import java.security.Principal;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 @RestController
-@RequestMapping("/reservations")
+@RequestMapping("/api/v1/reservations")
+@RequiredArgsConstructor
 public class ReservationController {
 
-    private final ReservationService reservationService;
+    private final ReservationService service;
 
-    @Autowired
-    public ReservationController(ReservationService reservationService) {
-        this.reservationService = reservationService;
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public void save(
+            @RequestBody Reservation reservation,
+            Principal principal
+    ) {
+        service.saveReservation(reservation);
     }
 
     @GetMapping
-    public ResponseEntity<List<Reservation>> getAllReservations() {
-        Iterable<Reservation> reservationsIterable = reservationService.getAllReservations();
-        List<Reservation> reservations = StreamSupport.stream(reservationsIterable.spliterator(), false)
-                .collect(Collectors.toList());
-        return ResponseEntity.ok(reservations);
+    public ResponseEntity<List<Reservation>> findAllReservations() {
+        return ResponseEntity.ok(service.findAllReservations());
     }
 
-    @PostMapping
-    public ResponseEntity<Reservation> createReservation(@RequestBody Reservation reservation) {
-        Reservation createdReservation = reservationService.createReservation(reservation);
-        return ResponseEntity.status(201).body(createdReservation); // Status 201 for creation
+    @GetMapping("/with-users/{reservationId}")
+    public ResponseEntity<FullReservationResponse> findAllReservations(
+            @PathVariable("reservationId") Integer reservationId
+    ) {
+        return ResponseEntity.ok(service.findReservationsWithUsers(reservationId));
     }
 
-    @GetMapping("/{reservationId}")
-    public ResponseEntity<Reservation> getReservationById(@PathVariable Long reservationId) {
-        Reservation reservation = reservationService.getReservationById(reservationId);
-        return reservation != null ? ResponseEntity.ok(reservation) : ResponseEntity.notFound().build();
-    }
-
-    @PutMapping("/{reservationId}")
-    public ResponseEntity<Reservation> updateReservation(@PathVariable Long reservationId, @RequestBody Reservation reservation) {
-        Reservation updatedReservation = reservationService.updateReservation(reservationId, reservation);
-        return updatedReservation != null ? ResponseEntity.ok(updatedReservation) : ResponseEntity.notFound().build();
-    }
-
-    @DeleteMapping("/{reservationId}")
-    public ResponseEntity<Void> deleteReservationById(@PathVariable Long reservationId) {
-        boolean deleted = reservationService.deleteReservationById(reservationId);
-        return deleted ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
-    }
 }

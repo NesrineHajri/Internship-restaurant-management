@@ -31,6 +31,8 @@ import com.restaurant.user.repository.RoleRepository;
 import com.restaurant.user.repository.UserRepository;
 import com.restaurant.user.security.jwt.JwtUtils;
 import com.restaurant.user.security.services.UserDetailsImpl;
+import org.springframework.web.bind.annotation.GetMapping;
+
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -51,6 +53,12 @@ public class AuthController {
   @Autowired
   JwtUtils jwtUtils;
 
+  @GetMapping("/users")
+  public ResponseEntity<?> getAllUsers() {
+    List<User> users = userRepository.findAll();
+    return ResponseEntity.ok(users);
+  }
+
   @PostMapping("/signin")
   public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
@@ -68,7 +76,10 @@ public class AuthController {
     return ResponseEntity.ok(new JwtResponse(jwt,
             userDetails.getId(),
             userDetails.getUsername(),
-            userDetails.getEmail(),
+            userDetails.getEmail() ,
+            userDetails.getFirstName(),
+            userDetails.getLastName(),
+            userDetails.getMobileNumber(),
             roles));
   }
 
@@ -120,11 +131,7 @@ public class AuthController {
                     .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
             roles.add(adminRole);
             break;
-          case "mod":
-            Role modRole = roleRepository.findByName(ERole.ROLE_MODERATOR)
-                    .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-            roles.add(modRole);
-            break;
+
           default:
             Role userRole = roleRepository.findByName(ERole.ROLE_USER)
                     .orElseThrow(() -> new RuntimeException("Error: Role is not found."));

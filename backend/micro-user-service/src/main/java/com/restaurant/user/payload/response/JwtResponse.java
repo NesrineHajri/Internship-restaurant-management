@@ -8,16 +8,30 @@ public class JwtResponse {
   private Long id;
   private String username;
   private String email;
+  private String firstName;
+  private String lastName;
+  private String mobileNumber;
   private List<String> roles;
 
-  public JwtResponse(String accessToken, Long id, String username, String email, List<String> roles) {
+  // Constructeur avec tous les paramètres
+  public JwtResponse(String accessToken, Long id, String username, String email,
+                     String firstName, String lastName, String mobileNumber,
+                     List<String> roles) {
     this.token = accessToken;
     this.id = id;
     this.username = username;
     this.email = email;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.mobileNumber = mobileNumber;
     this.roles = roles;
   }
 
+  // Constructeur sans paramètres
+  public JwtResponse() {
+  }
+
+  // Getters et setters
   public String getAccessToken() {
     return token;
   }
@@ -58,7 +72,50 @@ public class JwtResponse {
     this.username = username;
   }
 
+  public String getFirstName() {
+    return firstName;
+  }
+
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
+  }
+
+  public String getLastName() {
+    return lastName;
+  }
+
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
+  }
+
+  public String getMobileNumber() {
+    return mobileNumber;
+  }
+
+  public void setMobileNumber(String mobileNumber) {
+    this.mobileNumber = mobileNumber;
+  }
+
   public List<String> getRoles() {
     return roles;
+  }
+
+  public void setRoles(List<String> roles) {
+    this.roles = roles;
+  }
+
+  @Override
+  public String toString() {
+    return "JwtResponse{" +
+            "token='" + token + '\'' +
+            ", type='" + type + '\'' +
+            ", id=" + id +
+            ", username='" + username + '\'' +
+            ", email='" + email + '\'' +
+            ", firstName='" + firstName + '\'' +
+            ", lastName='" + lastName + '\'' +
+            ", mobileNumber='" + mobileNumber + '\'' +
+            ", roles=" + roles +
+            '}';
   }
 }

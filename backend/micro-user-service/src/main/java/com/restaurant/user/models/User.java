@@ -43,11 +43,18 @@ public class User {
   @Column(nullable = true)
   private String mobileNumber;
 
+
+  @Column(nullable = true)
+  private Integer reservationId;
+
+
+
   @ManyToMany(fetch = FetchType.LAZY)
   @JoinTable(  name = "user_roles", 
         joinColumns = @JoinColumn(name = "user_id"), 
         inverseJoinColumns = @JoinColumn(name = "role_id"))
   private Set<Role> roles = new HashSet<>();
+
 
 
   public User() {
@@ -58,13 +65,14 @@ public class User {
     this.email = email;
     this.password = password;
   }
-  public User(String username, String email, String password, String firstName, String lastName, String mobileNumber) {
+  public User(String username, String email, String password, String firstName, String lastName, String mobileNumber, Integer reservationId) {
     this.username = username;
     this.email = email;
     this.password = password;
     this.firstName = firstName;
     this.lastName = lastName;
     this.mobileNumber = mobileNumber;
+    this.reservationId = reservationId;
   }
 
   public Long getId() {
@@ -130,6 +138,16 @@ public class User {
   public void setMobileNumber(String mobileNumber) {
     this.mobileNumber = mobileNumber;
   }
+
+  public Integer getReservationId() {
+    return reservationId;
+  }
+
+  public void setReservationId(Integer reservationId) {
+    this.reservationId = reservationId;
+  }
+
+
 }
 
 
