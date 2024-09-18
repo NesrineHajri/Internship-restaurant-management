@@ -2,6 +2,7 @@ package com.restaurant.reservation.Service;
 
 import com.restaurant.reservation.Model.FullReservationResponse;
 import com.restaurant.reservation.Model.Reservation;
+import com.restaurant.reservation.Model.User;
 import com.restaurant.reservation.Repository.ReservationRepository;
 import com.restaurant.reservation.client.UserClient;
 import lombok.RequiredArgsConstructor;
@@ -42,4 +43,3 @@ public class ReservationService {
                 .build();
     }
 }
-

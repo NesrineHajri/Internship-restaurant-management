@@ -31,7 +31,7 @@ public class Reservation {
     private LocalDate date;
     private LocalTime reservationTime;
     private int numberOfGuests;
-    private Integer userId;
+    //private Integer userId;
 
 }
 

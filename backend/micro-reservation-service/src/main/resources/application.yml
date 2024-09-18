@@ -1,0 +1,6 @@
+server:
+  port:8094
+
+application:
+  config:
+    users-url: http://localhost:8091/api/auth
